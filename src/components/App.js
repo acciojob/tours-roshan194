@@ -41,13 +41,13 @@ const App = () => {
       </main>
     );
 
-  return (
-    <main>
-      <h2>Our Tours</h2>
-      <div className="underline"></div>
-      <Tours tours={tours} removeTour={removeTour} />
-    </main>
-  );
+    return (
+      <main id="main">
+        <h2>Our Tours</h2>
+        <div className="underline"></div>
+        <Tours tours={tours} removeTour={removeTour} />
+      </main>
+    );
 };
 
 export default App;
