@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Loading from "./Loading";
 import Tours from "./Tours";
-import "regenerator-runtime/runtime";
-
-
-const url = "https://course-api.com/react-tours-project";
+import localTours from "./data"; // local mock data
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -13,10 +10,11 @@ const App = () => {
   const fetchTours = async () => {
     setLoading(true);
     try {
-      const res = await fetch(url);
-      const data = await res.json();
-      setTours(data);
-      setLoading(false);
+      // Simulate loading delay
+      setTimeout(() => {
+        setTours(localTours);
+        setLoading(false);
+      }, 1000);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -35,19 +33,19 @@ const App = () => {
 
   if (tours.length === 0)
     return (
-      <main>
+      <main id="main">
         <h2>No tours left</h2>
         <button className="btn" onClick={fetchTours}>Refresh</button>
       </main>
     );
 
-    return (
-      <main id="main">
-        <h2>Our Tours</h2>
-        <div className="underline"></div>
-        <Tours tours={tours} removeTour={removeTour} />
-      </main>
-    );
+  return (
+    <main id="main">
+      <h2>Our Tours</h2>
+      <div className="underline"></div>
+      <Tours tours={tours} removeTour={removeTour} />
+    </main>
+  );
 };
 
 export default App;
