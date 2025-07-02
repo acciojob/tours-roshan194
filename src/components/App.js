@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Loading from "./Loading";
 import Tours from "./Tours";
+import "regenerator-runtime/runtime";
+
 
 const url = "https://course-api.com/react-tours-project";
 
