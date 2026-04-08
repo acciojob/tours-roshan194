@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import Loading from "./Loading";
+import React, { useState, useEffect } from "react";
 import Tours from "./Tours";
-import localTours from "./data"; // local mock data
+import Loading from "./Loading";
 
-const App = () => {
+const url = "https://course-api.com/react-tours-project";
+
+function App() {
   const [loading, setLoading] = useState(true);
   const [tours, setTours] = useState([]);
 
   const fetchTours = async () => {
     setLoading(true);
     try {
-      // Simulate loading delay
-      setTimeout(() => {
-        setTours(localTours);
-        setLoading(false);
-      }, 1000);
+      const response = await fetch(url);
+      const data = await response.json();
+      setTours(data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -22,30 +22,33 @@ const App = () => {
   };
 
   const removeTour = (id) => {
-    setTours(tours.filter((tour) => tour.id !== id));
+    const newTours = tours.filter((tour) => tour.id !== id);
+    setTours(newTours);
   };
 
   useEffect(() => {
     fetchTours();
   }, []);
 
-  if (loading) return <Loading />;
+  if (loading) {
+    return <Loading />;
+  }
 
-  if (tours.length === 0)
+  if (tours.length === 0) {
     return (
-      <main id="main">
+      <main>
         <h2>No tours left</h2>
-        <button className="btn" onClick={fetchTours}>Refresh</button>
+        <button onClick={fetchTours}>Refresh</button>
       </main>
     );
+  }
 
   return (
-    <main id="main">
-      <h2>Our Tours</h2>
-      <div className="underline"></div>
+    <main>
+      <h1>Our Tours</h1>
       <Tours tours={tours} removeTour={removeTour} />
     </main>
   );
-};
+}
 
 export default App;

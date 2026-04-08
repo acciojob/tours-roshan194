@@ -1,32 +1,25 @@
 import React, { useState } from "react";
 
-const Tour = ({ id, name, image, info, price, removeTour }) => {
-  const [showMore, setShowMore] = useState(false);
+function Tour({ id, name, info, image, price, removeTour }) {
+  const [readMore, setReadMore] = useState(false);
 
   return (
-    <article className="single-tour" id={`tour-item-${id}`}>
-      <img src={image} alt={name} />
-      <footer>
-        <div className="tour-info">
-          <h4>{name}</h4>
-          <h4 className="tour-price">${price}</h4>
-        </div>
-        <p id={`tour-item-para-${id}`}>
-          {showMore ? info : `${info.substring(0, 200)}...`}
-          <button onClick={() => setShowMore(!showMore)}>
-            {showMore ? "See less" : "Show more"}
-          </button>
-        </p>
-        <button
-          id={`delete-btn-${id}`}
-          className="delete-btn"
-          onClick={() => removeTour(id)}
-        >
-          Remove
+    <div className="tour">
+      <img src={image} alt={name} width="300" />
+      
+      <h4>{name}</h4>
+      <h4>₹{price}</h4>
+
+      <p>
+        {readMore ? info : `${info.substring(0, 200)}...`}
+        <button onClick={() => setReadMore(!readMore)}>
+          {readMore ? "See Less" : "Show More"}
         </button>
-      </footer>
-    </article>
+      </p>
+
+      <button onClick={() => removeTour(id)}>Remove</button>
+    </div>
   );
-};
+}
 
 export default Tour;
