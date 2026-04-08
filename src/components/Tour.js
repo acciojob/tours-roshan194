@@ -8,7 +8,7 @@ function Tour({ id, name, info, image, price, removeTour }) {
       <img src={image} alt={name} />
 
       <h4>{name}</h4>
-      <h4>₹{price}</h4>
+      <h4>${price}</h4>
 
       <p id={`tour-item-para-${id}`}>
         {readMore ? info : `${info.substring(0, 200)}...`}

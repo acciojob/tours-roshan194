@@ -44,7 +44,7 @@ function App() {
   }
 
   return (
-    <main>
+    <main id="main">
       <h1>Our Tours</h1>
       <Tours tours={tours} removeTour={removeTour} />
     </main>
